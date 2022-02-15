@@ -1,0 +1,20 @@
+{% load static %}
+<body style="background-image:url('{% static 'polls2/p2.webp' %}');">
+
+
+
+<link rel="stylesheet" type="text/css" href="{% static 'polls2/style.css' %}">
+{% block content %}
+    {% if latest_question_list %}
+        <ul>
+        {% for question in latest_question_list %}
+           <h2> <li><a href="{% url 'detail' question.id %}">{{ question.question_text }}</a></li></h2>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No polls are available.</p>
+    {% endif %}
+{% endblock %}
+<marquee behavior="scroll" direction="right" scrollamount="12" bgcolor="red">WELCOME</marquee>
+<marquee behavior="scroll" direction="left" scrollamount="20" bgcolor="orange">django project</marquee>
+

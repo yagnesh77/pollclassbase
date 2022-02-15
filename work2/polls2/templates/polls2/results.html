@@ -1,0 +1,31 @@
+{% load static %}
+<body style="background-image:url('{% static 'polls2/a1.jpg' %}');">
+
+<link rel="stylesheet" type="text/css" href="{% static 'polls2/style.css' %}"> 
+<h1>{{ question.question_text }}</h1>
+
+<ul>
+{% for choice in question.choice_set.all %}
+    <li>{{ choice.choice_text }} -- {{ choice.votes }} vote{{ choice.votes|pluralize }}</li>
+{% endfor %}
+</ul>
+
+
+<a href="{% url 'detail' question.id %}"><img src="{% static 'polls2/a1.gif' %}" alt="VOTE AGAIN" style="width:200px;height:100px;"></a></br></br></br></br>
+
+
+<table>
+    <tr>
+        <th>CHOICES</th>
+        <th>No of Votes</th>
+    </tr>
+    {% for choice in question.choice_set.all %}
+        <tr>
+            <td>{{ choice.choice_text }}</td>
+            <td>{{ choice.votes }} vote{{ choice.votes|pluralize }}</td>
+        </tr>
+    {% endfor %}
+</table>
+
+</body>
+</html>
