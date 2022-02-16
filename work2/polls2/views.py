@@ -26,8 +26,8 @@ class index(View):
 
   def post(self,request):
     form =ContactForm(request.POST)
-    form.save()
     if form.is_valid():
+    # form.save() when you make form through model and save this in database
      print(form.cleaned_data['name'])
      return HttpResponse('thanks')  
  
