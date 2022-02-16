@@ -53,3 +53,8 @@ tr:nth-child(even) {
 tr:nth-child(odd) {
   background-color: skyblue;
 }  
+
+h3
+{
+    color: violet;
+}
