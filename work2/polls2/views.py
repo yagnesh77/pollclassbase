@@ -4,6 +4,7 @@ from django.urls import reverse
 
 from .models import Choice, Question
 from django.views import View
+from .forms import ContactForm 
 
 """
 #THIS IS FUNCTION BASE VIEW FOR REFFER
@@ -17,8 +18,18 @@ def index(request):
 class index(View):
   def get(self,request):
    latest_question_list = Question.objects.order_by('-pub_date')[:5]
-   context = {'latest_question_list': latest_question_list,}
+   form =ContactForm()
+   context = {'latest_question_list': latest_question_list, 'form': form}
    return render(request,'polls2/index.html', context)
+
+    
+
+  def post(self,request):
+    form =ContactForm(request.POST)
+    form.save()
+    if form.is_valid():
+     print(form.cleaned_data['name'])
+     return HttpResponse('thanks')  
  
 """def detail(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
@@ -78,3 +89,16 @@ class vote(View):
         # with POST data. This prevents data from being posted twice if a
         # user hits the Back button.
         return HttpResponseRedirect(reverse('results', args=(question.id,))) 
+
+
+class contact(View):
+  def get(self,request) :
+    form =ContactForm()
+    return render(request,'polls2/index.html', {'form':form})
+  
+
+  def post(self,request):
+    form =ContactForm(request.POST)
+    if form.is_valid():
+     print(form.cleaned_data['name'])
+     return HttpResponse('thanks')  
